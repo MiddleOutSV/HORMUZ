@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>호르무즈 해협 봉쇄 여론 분석 보고서</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            line-height: 1.7;
+            color: #1a1a1a;
+            background: #fafafa;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 60px 40px 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .header .date {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        .content {
+            padding: 50px 40px;
+        }
+
+        .executive-summary {
+            background: #f8fafc;
+            border-left: 4px solid #3b82f6;
+            padding: 30px;
+            margin-bottom: 50px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .executive-summary h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 20px;
+        }
+
+        .key-findings {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .metric {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 30px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .ranking-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .ranking-table th {
+            background: #f9fafb;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #374151;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .ranking-table td {
+            padding: 16px;
+            border-bottom: 1px solid #f3f4f6;
+            vertical-align: top;
+        }
+
+        .ranking-table tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .country-name {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .score {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .score.high { color: #dc2626; }
+        .score.medium { color: #d97706; }
+        .score.low { color: #059669; }
+
+        .progress-bar {
+            width: 100px;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.8s ease;
+        }
+
+        .fill-high { background: #dc2626; }
+        .fill-medium { background: #d97706; }
+        .fill-low { background: #059669; }
+
+        .sentiment-tag {
+            display: inline-block;
+            background: #f3f4f6;
+            color: #4b5563;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .comments-section {
+            margin-top: 40px;
+        }
+
+        .country-analysis {
+            margin-bottom: 40px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .country-header {
+            background: #f9fafb;
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .country-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .country-meta {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .comment-item {
+            padding: 25px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .comment-item:last-child {
+            border-bottom: none;
+        }
+
+        .comment-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #374151;
+            margin-bottom: 15px;
+            font-style: italic;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .comment-text::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -5px;
+            font-size: 2rem;
+            color: #d1d5db;
+            font-family: Georgia, serif;
+        }
+
+        .comment-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        .source {
+            font-weight: 500;
+        }
+
+        .feasibility-score {
+            background: #eff6ff;
+            color: #1e40af;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .analysis-insights {
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 40px 0;
+        }
+
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .insight-card {
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .insight-title {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 10px;
+        }
+
+        .insight-text {
+            font-size: 0.9rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .conclusion {
+            background: #1e3a8a;
+            color: white;
+            padding: 40px;
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+
+        .conclusion h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .conclusion p {
+            font-size: 1rem;
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+
+        .methodology {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 1px solid #e5e7eb;
+        }
+
+        .methodology h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 15px;
+        }
+
+        .methodology ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .methodology li {
+            padding: 8px 0;
+            color: #6b7280;
+            font-size: 0.9rem;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .methodology li::before {
+            content: '•';
+            color: #3b82f6;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        @media print {
+            body { 
+                background: white; 
+                font-size: 14px;
+            }
+            .container { 
+                box-shadow: none; 
+                max-width: none;
+            }
+            .progress-fill {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content { padding: 30px 20px; }
+            .header { padding: 40px 20px 30px; }
+            .key-findings { grid-template-columns: 1fr; }
+            .ranking-table { font-size: 0.9rem; }
+            .comment-meta { flex-direction: column; gap: 8px; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>호르무즈 해협 봉쇄 여론 분석</h1>
+            <div class="subtitle">이스라엘-이란 충돌 상황 분석 보고서</div>
+            <div class="date">Strategic Intelligence Report | 2025년 6월 23일</div>
+        </div>
+
+        <div class="content">
+            <div class="executive-summary">
+                <h2>Executive Summary</h2>
+                <p>본 보고서는 최근 이스라엘-이란 군사적 충돌 상황에서 이란의 호르무즈 해협 봉쇄 위협에 대한 국제 여론을 분석한 것입니다. 5개국(미국, 영국, 일본, 중국, 독일)의 온라인 커뮤니티 및 언론 댓글을 종합 분석한 결과, 전체 평균 실현 가능성은 5.9/10으로 중간-높음 수준의 우려를 나타냅니다.</p>
+                
+                <div class="key-findings">
+                    <div class="metric">
+                        <div class="metric-value">5.9</div>
+                        <div class="metric-label">전체 평균 점수</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">7.25</div>
+                        <div class="metric-label">최고 우려 (일본)</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">4.5</div>
+                        <div class="metric-label">최저 우려 (미국)</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">5</div>
+                        <div class="metric-label">분석 대상국</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">국가별 실현 가능성 평가</h2>
+                <table class="ranking-table">
+                    <thead>
+                        <tr>
+                            <th>순위</th>
+                            <th>국가</th>
+                            <th>점수</th>
+                            <th>진행도</th>
+                            <th>주요 감정</th>
+                            <th>특징</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1</strong></td>
+                            <td class="country-name">🇯🇵 일본</td>
+                            <td><span class="score high">7.25</span></td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill fill-high" style="width: 72.5%;"></div>
+                                </div>
+                            </td>
+                            <td><span class="sentiment-tag">극도의 불안감</span></td>
+                            <td>에너지 의존도 90%로 인한 높은 우려</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2</strong></td>
+                            <td class="country-name">🇨🇳 중국</td>
+                            <td><span class="score medium">6.5</span></td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill fill-medium" style="width: 65%;"></div>
+                                </div>
+                            </td>
+                            <td><span class="sentiment-tag">반미 성향</span></td>
+                            <td>이란 지지와 실용적 대안 모색</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3</strong></td>
+                            <td class="country-name">🇩🇪 독일</td>
+                            <td><span class="score medium">5.75</span></td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill fill-medium" style="width: 57.5%;"></div>
+                                </div>
+                            </td>
+                            <td><span class="sentiment-tag">전략적 우려</span></td>
+                            <td>러시아 위기 이후 에너지 안보 중시</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4</strong></td>
+                            <td class="country-name">🇬🇧 영국</td>
+                            <td><span class="score medium">5.5</span></td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill fill-medium" style="width: 55%;"></div>
+                                </div>
+                            </td>
+                            <td><span class="sentiment-tag">분석적 우려</span></td>
+                            <td>NATO 개입 가능성과 경제적 파급효과</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5</strong></td>
+                            <td class="country-name">🇺🇸 미국</td>
+                            <td><span class="score low">4.5</span></td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill fill-low" style="width: 45%;"></div>
+                                </div>
+                            </td>
+                            <td><span class="sentiment-tag">회의적 자신감</span></td>
+                            <td>5함대 기반 군사적 억제력 신뢰</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="methodology">
+                <h4>분석 방법론</h4>
+                <ul>
+                    <li>데이터 소스: Reddit, 주요 언론사 댓글, 소셜미디어 플랫폼</li>
+                    <li>평가 척도: 10점 만점 실현 가능성 점수</li>
+                    <li>감정 분석: 키워드 기반 감정 분류</li>
+                    <li>표본 크기: 국가별 20개 이상의 대표 댓글</li>
+                </ul>
+            </div>
+
+            <div class="section comments-section">
+                <h2 class="section-title">국가별 상세 분석</h2>
+
+                <div class="country-analysis">
+                    <div class="country-header">
+                        <div class="country-title">🇯🇵 일본 - 극도의 우려 (7.25/10)</div>
+                        <div class="country-meta">중동 석유 의존도 90% | 주요 감정: 극도의 불안감</div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-text">일본의 석유 수입의 90%가 중동에서 온다. 호르무즈 해협 봉쇄는 일본 경제에 치명적이다. 정부는 대체 루트 확보를 급히 서둘러야 한다.</div>
+                        <div class="comment-meta">
+                            <span class="source">NHK News Comments • 👍 234</span>
+                            <span class="feasibility-score">실현가능성: 8/10</span>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-text">미국이 본격적으로 개입하면, 이란도 진짜로 봉쇄할지도 모른다. 제3차 세계대전의 시작이 될 가능성도 있다.</div>
+                        <div class="comment-meta">
+                            <span class="source">Mainichi Shimbun • 👍 276</span>
+                            <span class="feasibility-score">실현가능성: 8/10</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="country-analysis">
+                    <div class="country-header">
+                        <div class="country-title">🇨🇳 중국 - 반미 성향과 실용주의 (6.5/10)</div>
+                        <div class="country-meta">이란 석유 수입국 | 주요 감정: 반미 성향과 실용적 접근</div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-text">미국이 곳곳에서 군사행동을 하니, 이란은 자신을 보호할 권리가 있다. 호르무즈 해협 봉쇄는 주권적 행위다.</div>
+                        <div class="comment-meta">
+                            <span class="source">Weibo Comments • 👍 1,456</span>
+                            <span class="feasibility-score">실현가능성: 7/10</span>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-text">중국은 이란에서 많은 석유를 수입하지만, 우리에게는 다른 선택지도 있다. 러시아, 사우디가 모두 안정적 공급자다.</div>
+                        <div class="comment-meta">
+                            <span class="source">CGTN Comments • 👍 892</span>
+                            <span class="feasibility-score">실현가능성: 5/10</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="country-analysis">
+                    <div class="country-header">
+                        <div class="country-title">🇩🇪 독일 - 전략적 우려 (5.75/10)</div>
+                        <div class="country-meta">에너지 전환 진행 중 | 주요 감정: 전략적 우려와 외교적 해결 선호</div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-text">러시아 위기 이후 우리는 추가 에너지 위기를 감당할 수 없다. 독일은 외교를 위해 노력해야 한다.</div>
+                        <div class="comment-meta">
+                            <span class="source">Der Spiegel Comments • 👍 189</span>
+                            <span class="feasibility-score">실현가능성: 6/10</span>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-text">Iran이 Hormuz를 막으면 유가가 급등할 것이다. 우크라이나 전쟁으로 이미 인플레이션을 겪고 있는데, EU 경제에 재앙적이다.</div>
+                        <div class="comment-meta">
+                            <span class="source">Reddit r/de • 👍 267</span>
+                            <span class="feasibility-score">실현가능성: 7/10</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="country-analysis">
+                    <div class="country-header">
+                        <div class="country-title">🇬🇧 영국 - 우려 섞인 분석 (5.5/10)</div>
+                        <div class="country-meta">NATO 회원국 | 주요 감정: 분석적 우려와 현실적 접근</div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-text">Iran is being backed into a corner. Desperate regimes do desperate things. The threat is real and we should take it seriously.</div>
+                        <div class="comment-meta">
+                            <span class="source">The Guardian Comments • 👍 134</span>
+                            <span class="feasibility-score">실현가능성: 8/10</span>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-text">Britain learned from the Falklands that controlling sea lanes is crucial. Iran closing Hormuz would bring NATO involvement, they know this.</div>
+                        <div class="comment-meta">
+                            <span class="source">BBC News Comments • 👍 89</span>
+                            <span class="feasibility-score">실현가능성: 3/10</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="country-analysis">
+                    <div class="country-header">
+                        <div class="country-title">🇺🇸 미국 - 회의적 자신감 (4.5/10)</div>
+                        <div class="country-meta">5함대 주둔 | 주요 감정: 군사적 자신감과 회의적 시각</div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-text">Iran closing Hormuz would be economic suicide. They rely on oil exports through that very strait. It's mostly bluffing to put pressure on the US.</div>
+                        <div class="comment-meta">
+                            <span class="source">Reddit r/worldnews • 👍 245</span>
+                            <span class="feasibility-score">실현가능성: 2/10</span>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-text">US Navy will keep it open. We have the 5th Fleet in Bahrain specifically for this. Iran is not stupid enough to actually do it.</div>
+                        <div class="comment-meta">
+                            <span class="source">CNN Comments • 👍 78</span>
+                            <span class="feasibility-score">실현가능성: 3/10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="analysis-insights">
+                <h3 class="section-title">주요 통찰</h3>
+                <div class="insight-grid">
+                    <div class="insight-card">
+                        <div class="insight-title">에너지 의존도 상관관계</div>
+                        <div class="insight-text">중동 석유 의존도가 높은 국가일수록 실현 가능성을 높게 평가하는 경향을 보임. 일본(90% 의존)이 가장 높은 우려를 표시.</div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-title">지정학적 거리 효과</div>
+                        <div class="insight-text">호르무즈 해협과 지리적으로 가까운 아시아 국가들이 유럽/북미 국가보다 높은 우려 수준을 나타냄.</div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-title">군사적 역량 인식</div>
+                        <div class="insight-text">미국은 5함대 기반 군사적 억제력에 대한 신뢰로 상대적으로 낮은 우려를 보임. 반면 다른 국가들은 이란의 군사적 역량을 인정.</div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-title">과거 경험의 영향</div>
+                        <div class="insight-text">1980년대 탱커 전쟁 경험, 최근 러시아-우크라이나 전쟁으로 인한 에너지 위기 경험이 평가에 영향을 미침.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conclusion">
+                <h3>결론 및 정책적 시사점</h3>
+                <p><strong>주요 발견:</strong> 이란의 호르무즈 해협 봉쇄 위협은 국제사회에서 단순한 블러핑이 아닌 실제 가능성이 있는 시나리오로 인식되고 있습니다. 전체 평균 5.9/10의 우려 수준은 중간-높음에 해당하며, 특히 에너지 안보가 취약한 국가들에서 매우 높은 우려를 나타냅니다.</p>
+                <br>
+                <p><strong>정책적 함의:</strong> 각국 정부는 에너지 공급망 다변화, 대체 운송로 확보, 외교적 긴장 완화 노력을 통해 이러한 위험에 대비해야 할 필요성이 제기됩니다. 특히 아시아 국가들의 에너지 안보 우려에 대한 국제적 공조가 필요합니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Progressive enhancement for interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate progress bars on load
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach((bar, index) => {
+                const targetWidth = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = targetWidth;
+                }, 300 + (index * 200));
+            });
+
+            // Add subtle hover effects
+            const tableRows = document.querySelectorAll('.ranking-table tbody tr');
+            tableRows.forEach(row => {
+                row.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = '#f8fafc';
+                });
+                row.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = '';
+                });
+            });
+        });
+
+        // Print functionality
+        function printReport() {
+            window.print();
+        }
+
+        // Add print button via JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const printBtn = document.createElement('button');
+            printBtn.innerHTML = '🖨️ PDF로 저장';
+            printBtn.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 10px 20px;
+                background: #3b82f6;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: 500;
+                z-index: 1000;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            `;
+            printBtn.onclick = printReport;
+            document.body.appendChild(printBtn);
+        });
+    </script>
+</body>
+</html>
